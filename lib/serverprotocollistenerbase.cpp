@@ -39,6 +39,7 @@
 #include <QFile>
 #include <QStringList>
 #include <errno.h>
+#include <unistd.h>
 
 namespace QtRpc
 {

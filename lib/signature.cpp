@@ -269,7 +269,7 @@ QVector<QString> QtRpc::Signature::args() const
 
 QDataStream& operator>> (QDataStream& s, QtRpc::Signature& p)
 {
-	/*
+    /*
 	QString name;
 	int numArgs;
 	s >> name >> numArgs;
@@ -280,14 +280,38 @@ QDataStream& operator>> (QDataStream& s, QtRpc::Signature& p)
 	s >> arg;
 	p.setArg(i, arg);
 	}
-	*/
-	s >> p.qxt_d().data->name >> p.qxt_d().data->args;
+    */
+
+    //s >> p.qxt_d().data->name >> p.qxt_d().data->args;
+    QString countString;
+
+    s >> p.qxt_d().data->name;
+    s >> countString;
+
+    int count = countString.toInt();
+
+    p.qxt_d().data->args.clear();
+
+    for (int i = 0 ; i < count ; i++) {
+        QString arg;
+        s >> arg;
+        p.qxt_d().data->args.push_back(arg);
+    }
+
 	return s;
 }
 
 QDataStream& operator<< (QDataStream& s, const QtRpc::Signature& p)
 {
-	s << p.qxt_d().data->name << p.qxt_d().data->args;
+    //s << p.qxt_d().data->name << p.qxt_d().data->args;
+
+    s << p.qxt_d().data->name;
+    s << QString::number(p.qxt_d().data->args.size());
+
+    for (int i = 0 ; i < p.qxt_d().data->args.size() ; i++) {
+        s << p.qxt_d().data->args.at(i);
+    }
+
 	return s;
 }
 

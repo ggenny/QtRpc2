@@ -63,6 +63,7 @@
 #include <QScopedPointer>
 #include <Message>
 #include <authtoken.h>
+#include <QSharedPointer>
 
 #define CONVERT_VOID(_name)  if(name == #_name) return(*((_name *)data));
 
