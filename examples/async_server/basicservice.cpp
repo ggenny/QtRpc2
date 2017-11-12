@@ -28,6 +28,8 @@
 #include "basicservice.h"
 #include <QDebug>
 #include <QTimer>
+#include <unistd.h>
+
 #ifdef Q_OS_WIN
 #include <Windows.h>
 #define sleep(x) Sleep(x * 1000);
